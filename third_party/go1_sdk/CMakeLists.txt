@@ -9,13 +9,15 @@ add_compile_options(-std=c++14)
 message("-- CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
 if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64.*")
   set(ARCH amd64)
-endif()
+  set(EXTRA_LIBS -pthread ${PROJECT_SOURCE_DIR}/lib/cpp/${ARCH}/libunitree_legged_sdk.a)
+  endif()
 if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64.*")
   set(ARCH arm64)
+  set(EXTRA_LIBS -pthread ${PROJECT_SOURCE_DIR}/lib/cpp/${ARCH}/libunitree_legged_sdk.a)
 endif()
 
 link_directories(lib/cpp/${ARCH})
-set(EXTRA_LIBS -pthread libunitree_legged_sdk.so)
+
 
 set(CMAKE_CXX_FLAGS "-O3 -fPIC")
 
